@@ -1,17 +1,19 @@
 from fastapi import FastAPI
+
 from app.api.api_router import api_router
-from app.core.database import test_connection
+from app.core.database import engine
+
+from app.models.base import Base
+from app.models.document import Document
 
 app = FastAPI(
     title="Vellum API",
     version="1.0.0"
 )
 
-app.include_router(api_router)
+Base.metadata.create_all(bind=engine)
 
-@app.on_event("startup")
-def startup_event():
-    test_connection()
+app.include_router(api_router)
 
 @app.get("/")
 def root():

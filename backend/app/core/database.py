@@ -1,11 +1,18 @@
 from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
 from app.core.config import DATABASE_URL
 
 engine = create_engine(DATABASE_URL)
 
-def test_connection():
+SessionLocal = sessionmaker(
+    autocommit=False,
+    autoflush=False,
+    bind=engine
+)
+def get_db():
+    db = SessionLocal()
     try:
-        with engine.connect():
-            print("Database connection successful")
-    except Exception as e:
-        print(f"Database connection failed: {e}")
+        yield db
+    finally:
+        db.close()
