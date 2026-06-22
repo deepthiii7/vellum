@@ -12,6 +12,20 @@ from app.services.file_service import save_pdf
 from app.services.pdf_service import extract_text_from_pdf
 from app.services.chunk_service import create_chunks
 from app.services.embedding_service import generate_embeddings
+from app.services.vector_service import (
+    load_index,
+    search_chunks
+)
+from app.services.embedding_service import model
+from app.services.pdf_service import (
+    extract_text_from_pdf
+)
+from app.services.chunk_service import (
+    create_chunks
+)
+from app.services.vector_service import (
+    build_and_save_index
+)
 
 router = APIRouter(prefix="/documents", tags=["Documents"])
 
@@ -34,6 +48,16 @@ def upload_document(
         db.add(document)
         db.commit()
         db.refresh(document)
+        text = extract_text_from_pdf(
+             document.file_path
+        )
+
+        chunks = create_chunks(text)
+
+        build_and_save_index(
+            document.id,
+            chunks
+        )
 
         return {
             "id": document.id,
@@ -138,4 +162,46 @@ def get_document_embeddings(
             embeddings[0]
         ),
         "sample_embedding": embeddings[0][:10].tolist()
+    }
+
+@router.get("/{document_id}/search")
+def semantic_search(
+    document_id: int,
+    query: str,
+    db: Session = Depends(get_db)
+):
+
+    document = (
+        db.query(Document)
+        .filter(Document.id == document_id)
+        .first()
+    )
+
+    if not document:
+        raise HTTPException(
+            status_code=404,
+            detail="Document not found"
+        )
+
+    text = extract_text_from_pdf(
+        document.file_path
+    )
+
+    chunks = create_chunks(text)
+
+    index, chunks = load_index(
+        document.id
+    )
+
+    results = search_chunks(
+        query=query,
+        index=index,
+        chunks=chunks,
+        model=model,
+        top_k=3
+    )
+
+    return {
+        "query": query,
+        "results": results
     }
