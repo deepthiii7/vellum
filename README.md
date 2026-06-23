@@ -225,11 +225,3 @@ Typical MVP performance:
 * Cloud object storage
 * Multi-agent workflows
 * Advanced analytics dashboard
-
----
-
-## Resume Highlights
-
-* Built a full-stack Retrieval-Augmented Generation platform using FastAPI, React, PostgreSQL, FAISS, and Groq.
-* Implemented semantic search, persistent vector indexing, document comparison, and structured information extraction for PDF intelligence workflows.
-* Containerized the application with Docker and automated validation using GitHub Actions CI pipelines.
