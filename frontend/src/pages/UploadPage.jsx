@@ -54,6 +54,9 @@ function UploadPage() {
         documents={
           documents
         }
+        onDeleteSuccess={
+          loadDocuments
+        }
       />
     </div>
   );

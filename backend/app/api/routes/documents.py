@@ -3,7 +3,7 @@ from fastapi import UploadFile
 from fastapi import File
 from fastapi import Depends
 from fastapi import HTTPException
-
+from pathlib import Path
 from sqlalchemy.orm import Session
 
 from app.core.database import get_db
@@ -24,7 +24,8 @@ from app.services.chunk_service import (
     create_chunks
 )
 from app.services.vector_service import (
-    build_and_save_index
+    build_and_save_index,
+    delete_index
 )
 
 router = APIRouter(prefix="/documents", tags=["Documents"])
@@ -220,3 +221,44 @@ def get_documents(
         }
         for doc in documents
     ]
+
+
+@router.delete("/{document_id}")
+def delete_document(
+    document_id: int,
+    db: Session = Depends(get_db)
+):
+
+    document = (
+        db.query(Document)
+        .filter(
+            Document.id == document_id
+        )
+        .first()
+    )
+
+    if not document:
+        raise HTTPException(
+            status_code=404,
+            detail="Document not found"
+        )
+
+    file_path = Path(
+        document.file_path
+    )
+
+    if file_path.exists():
+        file_path.unlink()
+
+    delete_index(
+        document.id
+    )
+
+    db.delete(document)
+
+    db.commit()
+
+    return {
+        "message":
+        "Document deleted successfully"
+    }

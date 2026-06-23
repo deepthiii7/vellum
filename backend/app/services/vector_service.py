@@ -128,3 +128,20 @@ def search_chunks(
             )
 
     return results
+
+def delete_index(document_id):
+    index_path = (
+        INDEX_DIR /
+        f"doc_{document_id}.index"
+    )
+
+    metadata_path = (
+        METADATA_DIR /
+        f"doc_{document_id}.json"
+    )
+
+    if index_path.exists():
+        index_path.unlink()
+
+    if metadata_path.exists():
+        metadata_path.unlink()
