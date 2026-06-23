@@ -1,0 +1,94 @@
+# =========================
+# Python
+# =========================
+
+venv/
+.venv/
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.py[cod]
+*$py.class
+
+# =========================
+# Environment Variables
+# =========================
+
+.env
+.env.local
+
+backend/.env
+frontend/.env
+
+# =========================
+# PostgreSQL
+# =========================
+
+*.db
+
+# =========================
+# Uploads
+# =========================
+
+backend/app/uploads/*
+
+!backend/app/uploads/.gitkeep
+
+# =========================
+# FAISS
+# =========================
+
+backend/app/vectorstore/faiss_index/*
+backend/app/vectorstore/metadata/*
+
+!backend/app/vectorstore/faiss_index/.gitkeep
+!backend/app/vectorstore/metadata/.gitkeep
+
+# =========================
+# Node
+# =========================
+
+node_modules/
+
+# =========================
+# Vite Build
+# =========================
+
+dist/
+build/
+
+# =========================
+# VS Code
+# =========================
+
+.vscode/
+
+# =========================
+# OS Files
+# =========================
+
+.DS_Store
+Thumbs.db
+
+# =========================
+# Logs
+# =========================
+
+*.log
+
+# =========================
+# Testing
+# =========================
+
+.pytest_cache/
+.coverage
+htmlcov/
+
+# =========================
+# Cache
+# =========================
+
+.mypy_cache/
+.ruff_cache/

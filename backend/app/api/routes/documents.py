@@ -205,3 +205,18 @@ def semantic_search(
         "query": query,
         "results": results
     }
+
+@router.get("/")
+def get_documents(
+    db: Session = Depends(get_db)
+):
+    documents = db.query(Document).all()
+
+    return [
+        {
+            "id": doc.id,
+            "filename": doc.filename,
+            "uploaded_at": doc.uploaded_at
+        }
+        for doc in documents
+    ]

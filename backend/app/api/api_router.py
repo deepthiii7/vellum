@@ -6,6 +6,9 @@ from app.api.routes.chat import router as chat_router
 from app.api.routes.compare import (
     router as compare_router
 )
+from app.api.routes.extract import (
+    router as extract_router
+)
 
 api_router = APIRouter()
 
@@ -13,3 +16,4 @@ api_router.include_router(health_router)
 api_router.include_router(document_router)
 api_router.include_router(chat_router)
 api_router.include_router(compare_router)
+api_router.include_router(extract_router)
