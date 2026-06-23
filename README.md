@@ -6,29 +6,27 @@ Upload PDFs, ask questions using Retrieval-Augmented Generation (RAG), compare d
 
 ---
 
-## Demo
+## Screenshots
 
-### Screenshots
+### Vellum Dashboard
 
-Replace with your screenshots later.
+![Dashboard](docs/screenshots/01_dashboard.png)
 
-```text
-docs/screenshots/
+### Vellum Upload Page
 
-01_dashboard.png
-02_upload.png
-03_chat.png
-04_compare.png
-05_extract.png
-```
+![Document Upload](docs/screenshots/02_upload.png)
 
-### Demo GIF
+### Vellum Chat Page
 
-Add later:
+![Chat](docs/screenshots/03_chat.png)
 
-```text
-docs/demo/vellum-demo.gif
-```
+### Vellum Comparison Page
+
+![Compare](docs/screenshots/04_compare.png)
+
+### Vellum Extract Page
+
+![Extract](docs/screenshots/05_extract.png)
 
 ---
 
