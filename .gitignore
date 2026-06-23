@@ -17,10 +17,14 @@ __pycache__/
 # =========================
 
 .env
-.env.local
+.env.*
+!.env.example
+.env.docker
 
 backend/.env
 frontend/.env
+backend/.env.docker
+frontend/.env.docker
 
 # =========================
 # PostgreSQL
