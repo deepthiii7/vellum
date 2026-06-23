@@ -11,6 +11,8 @@ function ChatPage() {
   const [documents, setDocuments] =
     useState([]);
 
+  console.log(documents);
+
   const [selectedDocument,
     setSelectedDocument] =
     useState("");
