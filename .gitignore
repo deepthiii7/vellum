@@ -20,6 +20,7 @@ __pycache__/
 .env.*
 !.env.example
 .env.docker
+.env.production
 
 backend/.env
 frontend/.env
